@@ -220,3 +220,4 @@ __marimo__/
 #custom
 data/
 examples/example_output/
+.vscode/
