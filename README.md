@@ -48,30 +48,6 @@ This installs all required dependencies and sets up a dedicated Conda environmen
 
 ---
 
-## Workflow
-
-BAPAO follows the workflow introduced in the accompanying publication:
-
-```
-Experimental LHAR growth profile
-            │
-            ▼
- Double-exponential fit
-            │
-            ▼
- Physics-informed MCMC
-            │
-            ▼
- Posterior distributions
-            │
-            ▼
- Estimated ALD parameters
-```
-
-The analytical fit provides fast parameter estimates and informs the Bayesian inference, while MCMC returns posterior distributions that quantify parameter uncertainty.
-
----
-
 ## Examples
 
 The `examples/` directory contains example workflows demonstrating:
@@ -90,8 +66,7 @@ These examples provide a good starting point for applying BAPAO to your own ALD 
 
 If you use BAPAO in your research, please cite the accompanying publication:
 
-<!-- > **F.A.E.M. Klabbers, M.C. van Gurp, J. Lee, and W.M.M. Kessels**
-> *Physics-Informed Bayesian Estimation of Physical Parameters for Atomic Layer Deposition* -->
+Paper: [Publication link coming soon]
 
 @article{placeholder,
     title = {},
