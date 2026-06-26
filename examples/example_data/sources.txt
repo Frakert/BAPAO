@@ -1,0 +1,7 @@
+
+Sources for data provided in this folder.
+Note that data labelled Purunen was taken from Zenedo [1] was published by Yim [2]:
+
+[1] R. Puurunen and O. Ylivaara, ‘ALD Al2O3 thickness profile in microscopic rectangular channel, TMA-water 300 degC 500 cycles, PillarHall(TM) LHAR3-1b, V0001’. Zenodo, May 31, 2021. doi: 10.5281/zenodo.3974438.
+[2] J. Yim et al., ‘Saturation profile based conformality analysis for atomic layer deposition: aluminum oxide in lateral high-aspect-ratio channels’, Oct. 2020, doi: 10.1039/D0CP03358H.
+

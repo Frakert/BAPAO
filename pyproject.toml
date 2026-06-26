@@ -1,0 +1,80 @@
+[build-system]
+requires = ["hatchling", "hatch-vcs"]
+build-backend = "hatchling.build"
+
+[project]
+name = "BAPAO"
+dynamic = ["version"]
+description = "Bayesian inference for parameterized ALD with modular MCMC and surrogate models"
+readme = "README.md"
+license = "MIT"
+requires-python = ">=3.9,<3.13"
+
+classifiers = [
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+]
+
+dependencies = [
+    "emcee>=3.1.0",
+    "matplotlib>=3.10.0",
+    "numpy>=1.26,<2.1",
+    "scipy>=1.11,<1.14",
+    "pandas>=2.1,<2.3",
+    "scikit-learn>=1.0.0",
+    "tensorflow>=2.15,<2.17",
+    "tensorflow-probability>=0.20.0",
+    "h5py>=3.0.0",
+    "tqdm>=4.66"
+]
+
+[project.optional-dependencies]
+dev = [
+    "ruff>=0.0.280",
+    "pytest>=7.0.0",
+    "ipython>=8.0.0",
+]
+
+viz = [
+    "seaborn>=0.13.0",
+    "corner>=2.0.0",
+]
+
+[tool.hatch.version]
+source = "vcs"
+fallback-version = "0.1.0dev"
+
+[tool.hatch.build.hooks.vcs]
+version-file = "./src/BAPAO/_version.py"
+
+[tool.hatch.build.targets.wheel]
+packages = [
+    "src/BAPAO",
+]
+artifacts = [
+    "src/BAPAO/models/*.weights.h5",
+]
+
+[tool.hatch.build.targets.sdist]
+include = [
+    "/src",
+    "/tests",
+    "/examples",
+    "/README.md",
+    "/pyproject.toml",
+]
+
+[tool.hatch.envs.default]
+dependencies = [
+    "ipykernel",
+    "ipython",
+]
+
+[tool.ruff]
+target-version = "py39"
+line-length = 100
+exclude = ["*.ipynb"]
+
+[tool.ruff.lint]
+extend-select = ["F", "E", "W", "UP", "B", "C4", "SIM", "RUF"]
