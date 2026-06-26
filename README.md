@@ -15,9 +15,9 @@ Using experimental growth profiles, BAPAO can estimate:
 
 The package combines a fast analytical double-exponential fit with Bayesian Markov Chain Monte Carlo (MCMC) inference to obtain parameter estimates together with calibrated uncertainty intervals.
 
-<p align="center">
+<!-- <p align="center">
   <img src="https://github.com/Frakert/BAPAO/blob/main/assets/BAPAO%20Logo.png" width="600" alt="BAPAO Logo">
-</p>
+</p> -->
 
 ---
 
