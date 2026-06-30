@@ -18,7 +18,6 @@ from __future__ import annotations
 
 import time
 from collections.abc import Mapping, Sequence
-from dataclasses import dataclass
 
 import numpy as np
 
@@ -26,10 +25,10 @@ from BAPAO.likelihoods import LikelihoodTerm, coerce_likelihood_term
 from BAPAO.parameters import resolve_config_param_names, validate_config
 from BAPAO.priors import PriorTerm
 
-
 # ---------------------------------------------------------------------------
 # Parameter unpacking helpers
 # ---------------------------------------------------------------------------
+
 
 def unpack_theta(theta_batch: np.ndarray, param_names: Sequence[str]) -> dict[str, np.ndarray]:
     """Convert log10-space parameter batch to linear space.
@@ -95,6 +94,7 @@ def resolve_parameter_batch(
 # Log-prior
 # ---------------------------------------------------------------------------
 
+
 def log_prior_vectorized(
     theta_batch: np.ndarray,
     config: Mapping[str, object],
@@ -154,12 +154,14 @@ def log_prior_vectorized(
     if prior is not None and np.any(valid):
         params_valid = resolve_parameter_batch(theta_batch[valid], config)
         lp[valid] += prior.log_prior_vectorized(params_valid)
-        return lp
+
+    return lp
 
 
 # ---------------------------------------------------------------------------
 # Observation normalisation helpers
 # ---------------------------------------------------------------------------
+
 
 def _normalize_observation(observation: Mapping[str, object]) -> dict[str, object]:
     normalized = dict(observation)
@@ -195,6 +197,7 @@ def _normalize_observations(
 # ---------------------------------------------------------------------------
 # Log-likelihood and log-posterior
 # ---------------------------------------------------------------------------
+
 
 def log_likelihood_vectorized(
     theta_batch: np.ndarray,
@@ -270,6 +273,7 @@ def log_posterior_vectorized(
 # ---------------------------------------------------------------------------
 # Miscellaneous helpers
 # ---------------------------------------------------------------------------
+
 
 def _default_log_center(bounds: tuple[float, float]) -> float:
     return 0.5 * (np.log10(bounds[0]) + np.log10(bounds[1]))
@@ -370,7 +374,7 @@ def _tracker_params(
         "postprocess_batch_size": postprocess_batch_size,
         "n_parameters": len(config["names"]),  # type: ignore[arg-type]
         "n_observations": observation_count(observations),
-        "prior": prior.summary()if prior is not None else {"kind": "uniform"}
+        "prior": prior.summary() if prior is not None else {"kind": "uniform"},
     }
 
     return params
@@ -439,6 +443,7 @@ def _build_initial_positions(
 # ---------------------------------------------------------------------------
 # Main entry point
 # ---------------------------------------------------------------------------
+
 
 def run_mcmc(
     *,

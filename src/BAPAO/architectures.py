@@ -5,13 +5,11 @@ from collections.abc import Sequence
 import keras
 import tensorflow as tf
 
-# very compute expensive, but does allow CVD models to train without NaN loss values.
-# They have very large ranges thus require the extra precision to avoid underflow/overflow
-# issues during training.
-# TODO: Normalise the input parameters to avoid this requirement and speed up training.
+# CVD models need float32 to avoid NaN loss values during training.
+# Their input ranges are wide enough that extra precision helps avoid underflow and overflow.
 tf.keras.mixed_precision.set_global_policy("float32")
 
-# the way faster option, but doesnt work for CVD models due to NaN loss values during training.
+# Faster, but not stable enough for the CVD models.
 # tf.keras.mixed_precision.set_global_policy("mixed_float16")
 
 
@@ -27,8 +25,6 @@ def build_parameterized_dnn(
             self.width = width
             self.depth = depth
 
-            # self.input_scaler = keras.layers.Normalization(axis=-1, name="input_scaler")
-
             self.hidden = [
                 keras.layers.Dense(
                     width,
@@ -39,7 +35,7 @@ def build_parameterized_dnn(
                 for idx in range(depth)
             ]
 
-            #  Force float32 on the output layer for mixed_precision stability
+            # Force float32 on the output layer for mixed_precision stability.
             self.out = keras.layers.Dense(
                 1,
                 name="out",
@@ -64,8 +60,6 @@ def build_parameterized_dnn(
                 features.append(extra_params_n)
 
             x = tf.concat(features, axis=1)
-            # x = self.input_scaler(x)
-
             for layer in self.hidden:
                 x = layer(x)
             return self.out(x)
